@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ffffff"
-    android:layout_height="match_parent">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Refresh"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_gravity="center"
-        android:textIsSelectable="true"
-        android:onClick="refresh"/>
 
 
 
         <ListView
+            android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clickable="false"
-            android:id="@+id/listview"
-            android:layout_weight="5"/>
+            android:layout_weight="5"
+            android:clickable="false"/>
 
     <ImageView
         android:id="@+id/ad1"
         android:layout_width="match_parent"
-        android:src="@drawable/ad"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:src="@drawable/ad"/>
 
 
 </LinearLayout>

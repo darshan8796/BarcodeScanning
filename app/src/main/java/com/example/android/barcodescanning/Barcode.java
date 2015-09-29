@@ -1,6 +1,5 @@
 package com.example.android.barcodescanning;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,46 +13,45 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-/**
- * Created by User on 8/24/2015.
- */
+
 public class Barcode extends AppCompatActivity {
 
-    private int flag = 1;
     public static final String PREF = "ClueStorage";
     public static int display = -1;
     ImageView imageView;
-
+    private int flag = 1;
+    public static int queset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.barcode);
-        Toast.makeText(getApplicationContext(), "Barcode onCreate", Toast.LENGTH_SHORT).show();
-        TextView txt = (TextView) findViewById(R.id.clue);
-        SharedPreferences currClue = getSharedPreferences(PREF,MODE_PRIVATE);
-        txt.setText(currClue.getString("0", "Clue Will come here!"));
-        flag = currClue.getInt("1",1);
 
+        Toast.makeText(getApplicationContext(), "Barcode onCreate", Toast.LENGTH_SHORT).show();
+
+        TextView txt = (TextView) findViewById(R.id.clue);
+        SharedPreferences currClue = getSharedPreferences(PREF, MODE_PRIVATE);
+        txt.setText(currClue.getString("0", "Clue Will come here!"));
+        flag = currClue.getInt("1", 1);
+        queset = currClue.getInt("2", 0);
         adLoader();
 
     }
 
-    void adLoader()
-    {
+    void adLoader() {
 
-        final  int []imageArray={R.drawable.ad,R.drawable.img2,R.drawable.img3};
+        final int[] imageArray = {R.drawable.ad, R.drawable.img2, R.drawable.img3};
 
-        imageView= (ImageView) findViewById(R.id.ad);
+        imageView = (ImageView) findViewById(R.id.ad);
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
-            int i=0;
+            int i = 0;
+
             public void run() {
                 imageView.setImageResource(imageArray[i]);
                 i++;
-                if(i>imageArray.length-1)
-                {
-                    i=0;
+                if (i > imageArray.length - 1) {
+                    i = 0;
                 }
                 handler.postDelayed(this, 5000);  //for interval...
             }
@@ -66,23 +64,17 @@ public class Barcode extends AppCompatActivity {
 
         super.onDestroy();
         TextView txt = (TextView) findViewById(R.id.clue);
-        Toast.makeText(getApplicationContext(), "Barcode onDestroy", Toast.LENGTH_SHORT).show();
-        SharedPreferences currClue = getSharedPreferences(PREF,MODE_PRIVATE);
-        SharedPreferences.Editor editor = currClue.edit();
-        editor.putString("0", txt.getText().toString() );
-        editor.putInt("1", flag);
 
+        Toast.makeText(getApplicationContext(), "Barcode onDestroy", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences currClue = getSharedPreferences(PREF, MODE_PRIVATE);
+        SharedPreferences.Editor editor = currClue.edit();
+        editor.putString("0", txt.getText().toString());
+        editor.putInt("1", flag);
+        editor.putInt("2", queset);
         editor.commit();
 
 
-    }
-
-    public void refresh(View view)
-    {
-        flag = 1;
-        display=-1;
-        TextView txt = (TextView) findViewById(R.id.clue);
-        txt.setText("Clue Will come here!");
     }
 
 
@@ -101,13 +93,7 @@ public class Barcode extends AppCompatActivity {
         integrator.initiateScan();
     }
 
-    /**
-     * function handle scan result
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param intent
-     */
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
@@ -117,16 +103,12 @@ public class Barcode extends AppCompatActivity {
 //we have a result
 
 
-
             switch (scanContent) {
                 case "clue1": {
                     if (flag == 1) {
                         txt.setText(R.string.clue1);
-
                         flag++;
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Order!", Toast.LENGTH_LONG).show();
                     }
                     break;
@@ -136,10 +118,9 @@ public class Barcode extends AppCompatActivity {
                     if (flag == 2) {
                         txt.setText(R.string.clue2);
                         display = 1;
+                        queset = 1;
                         flag++;
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Order!", Toast.LENGTH_LONG).show();
                     }
                     break;
@@ -150,24 +131,20 @@ public class Barcode extends AppCompatActivity {
                         txt.setText(R.string.clue3);
                         display = 2;
                         flag++;
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Order!", Toast.LENGTH_LONG).show();
                     }
                     break;
                 }
+
                 default:
-
-
                     Toast.makeText(getApplicationContext(), "Invalid Barcode!", Toast.LENGTH_LONG).show();
-
                     break;
             }
 
 // display it on screen
             //TextView formatTxt = (TextView) findViewById(R.id.scan_format);
-           // TextView contentTxt = (TextView) findViewById(R.id.scan_format);
+            // TextView contentTxt = (TextView) findViewById(R.id.scan_format);
 
             //contentTxt.setText("CONTENT: " + scanContent);
 
@@ -175,6 +152,11 @@ public class Barcode extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    public void extraQ(View view) {
+        Intent intent = new Intent(this, ExtraQ.class);
+        startActivity(intent);
     }
 
 

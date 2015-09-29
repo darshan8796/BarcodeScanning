@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by User on 9/11/2015.
- */
+
 public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +16,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run()
             {
                 try{
-                    sleep(4000);
+                    sleep(2500);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{

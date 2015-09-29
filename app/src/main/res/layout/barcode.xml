@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-
             android:textColor="#000000"
             android:text="Clue Will come here!"
             android:textIsSelectable="true"
@@ -29,31 +28,41 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/scan_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:onClick="scanNow"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        android:text="Scan" />
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/scan_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:onClick="scanNow"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="Scan" />
+
+        <Button
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:onClick="extraQ"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="Extra Q's" />
 
 
-    <Button
+    </LinearLayout>
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:onClick="refresh"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        android:text="Refresh"
-        android:textIsSelectable="true" />
+
+
 
 
 

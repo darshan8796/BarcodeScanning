@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by User on 8/24/2015.
- */
+
 public class Progress extends AppCompatActivity {
 
     private static final String PREF = "ListStorage";
@@ -57,17 +55,19 @@ public class Progress extends AppCompatActivity {
         if (Barcode.display > 0) {
             switch (Barcode.display) {
                 case 1:
-                    elements.add("Clue 1 done ");
+                    //elements.add("Clue 1 done ");
+                    add(1);
                     Barcode.display = 0;
                     adapter.notifyDataSetChanged();
-                    count++;
+                    //count++;
                     break;
 
                 case 2:
-                    elements.add("Clue 2 done ");
+                    //elements.add("Clue 2 done ");
+                    add(2);
                     Barcode.display = 0;
                     adapter.notifyDataSetChanged();
-                    count++;
+                    //count++;
                     break;
 
                 default:
@@ -75,6 +75,14 @@ public class Progress extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void add(int c) {
+        elements.clear();
+        count = c;
+        for (int i = 0; i < c; i++) {
+            elements.add("Clue " + (i + 1) + " done!");
+        }
     }
 
     void adLoader() {
@@ -98,12 +106,7 @@ public class Progress extends AppCompatActivity {
         handler.postDelayed(runnable, 5000); //for initial delay..
     }
 
-    public void refresh(View view) {
-        count = 0;
-        elements.clear();
-        adapter.notifyDataSetChanged();
 
-    }
 
     @Override
     public void onDestroy() {
